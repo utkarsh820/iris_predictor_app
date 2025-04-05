@@ -1,1 +1,1 @@
-web: gunicorn app_redirect:application
+web: gunicorn app_render:application

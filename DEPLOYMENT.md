@@ -79,8 +79,9 @@ from app_noplots import application
 
 ## Switching Between Versions
 
-The app has two versions:
-- `app.py` - Full version with plotting
-- `app_noplots.py` - Version without plotting for better compatibility
+The app has three versions:
+- `app.py` - Full version with plotting (for local development)
+- `app_noplots.py` - Version without plotting for PythonAnywhere
+- `app_render.py` - Version specifically optimized for Render.com
 
-Both versions are configured to work on either platform.
+All versions maintain the same core functionality but with different dependencies and optimizations for each platform.
