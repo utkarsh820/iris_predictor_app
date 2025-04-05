@@ -55,8 +55,9 @@ from app_noplots import application
 3. Choose "Python" as the environment
 
 ### Step 3: Configure Build Settings
-1. Build Command: `pip install -r requirements.txt`
+1. Build Command: `chmod +x build.sh && ./build.sh`
 2. Start Command: `gunicorn app_noplots:application`
+3. Alternatively, you can use the provided `render.yaml` file for automatic configuration
 
 ### Step 4: Add Environment Variables
 1. Add `GOOGLE_API_KEY` with your Google API key
