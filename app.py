@@ -5,13 +5,11 @@ import base64
 import matplotlib
 matplotlib.use('Agg')  # Required for non-interactive backend
 import matplotlib.pyplot as plt
-import seaborn as sns
 from datetime import datetime, timedelta
 import os
 from dotenv import load_dotenv
 import google.generativeai as genai  # Add this import
 from collections import defaultdict
-import time
 
 # Load environment variables from .env file
 load_dotenv()
@@ -24,21 +22,30 @@ if not GOOGLE_API_KEY:
 # Configure Google Generative AI
 genai.configure(api_key=GOOGLE_API_KEY)
 
-# Initialize the model
+# Initialize the model with error handling
 try:
     model = genai.GenerativeModel('gemini-2.0-flash')
     print("Successfully initialized Gemini 2.0 Flash model")  # Add logging for confirmation
+
+    # Test the model with a simple prompt to verify it's working
+    try:
+        test_response = model.generate_content("Hello")
+        print("Model test successful")
+    except Exception as e:
+        print(f"Model test failed: {str(e)}")
+        # Don't raise here, just log the error
+        # This allows the app to start even if the model test fails
+        # The /ask endpoint will handle errors separately
 except Exception as e:
     print(f"Error initializing Gemini model: {str(e)}")  # Detailed error logging
-    raise
-
-# Test the model with a simple prompt to verify it's working
-try:
-    test_response = model.generate_content("Hello")
-    print("Model test successful")
-except Exception as e:
-    print(f"Model test failed: {str(e)}")
-    raise
+    # Don't raise here, just log the error
+    # Define a placeholder model that will return an error message
+    class PlaceholderModel:
+        def generate_content(self, *args, **kwargs):
+            class PlaceholderResponse:
+                text = "Sorry, the AI model is currently unavailable. Please try again later."
+            return PlaceholderResponse()
+    model = PlaceholderModel()
 
 app = Flask(__name__)
 app.secret_key = os.environ.get('SECRET_KEY', 'your-secret-key')
@@ -140,9 +147,9 @@ def index():
                 # Clear any existing plots
                 plt.clf()
 
-                # Create figure with dark background
+                # Create figure with dark background - smaller size to reduce memory usage
                 plt.style.use('dark_background')
-                fig, ax = plt.subplots(figsize=(10, 6))
+                fig, ax = plt.subplots(figsize=(8, 4))
 
                 # Create bar plot
                 bars = ax.bar(['Sepal Length', 'Sepal Width', 'Petal Length', 'Petal Width'],
@@ -165,14 +172,14 @@ def index():
                 fig.patch.set_facecolor('#1a1a1a')
                 ax.grid(True, linestyle='--', alpha=0.3)
 
-                # Save plot to bytes buffer
+                # Save plot to bytes buffer with lower DPI to reduce memory usage
                 buf = BytesIO()
                 plt.savefig(buf, format='png',
                             bbox_inches='tight',
                             facecolor='#1a1a1a',
                             edgecolor='none',
                             transparent=True,
-                            dpi=100)
+                            dpi=80)
                 buf.seek(0)
                 plot_url = base64.b64encode(buf.getvalue()).decode('utf8')
                 plt.close(fig)  # Close the figure to free memory
@@ -278,11 +285,12 @@ def ask_question():
         full_prompt = context + question
 
         try:
-            # Simplified model generation call
+            # Simplified model generation call with more conservative settings
             generation_config = genai.types.GenerationConfig(
                 temperature=0.7,
                 top_p=0.8,
-                top_k=40
+                top_k=40,
+                max_output_tokens=500  # Limit response length to save memory
             )
 
             response = model.generate_content(
@@ -329,6 +337,16 @@ def api_status():
         'remaining_requests': remaining,
         'limit': API_RATE_LIMIT,
         'reset_time': (datetime.now().replace(hour=0, minute=0, second=0, microsecond=0) + timedelta(days=1)).strftime("%Y-%m-%d %H:%M:%S")
+    })
+
+# Add a simple health check endpoint
+@app.route("/health")
+def health_check():
+    return jsonify({
+        'status': 'ok',
+        'timestamp': datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
+        'app_version': '1.0.1',
+        'python_version': os.environ.get('PYTHON_VERSION', 'unknown')
     })
 
 if __name__ == "__main__":
@@ -384,8 +402,15 @@ if __name__ == "__main__":
             """)
         print("Created dummy templates/index.html")
 
-    # Run the app
-    app.run(host='0.0.0.0', port=port, debug=False)
+    # Run the app - ensure proper binding for production environments
+    try:
+        app.run(host='0.0.0.0', port=port, debug=False)
+    except Exception as e:
+        print(f"Error starting the application: {str(e)}")
+        # Try alternative port if specified port is unavailable
+        alt_port = int(os.environ.get("ALTERNATIVE_PORT", 8080))
+        print(f"Attempting to start on alternative port {alt_port}")
+        app.run(host='0.0.0.0', port=alt_port, debug=False)
 
 
 
