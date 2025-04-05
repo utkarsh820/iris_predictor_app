@@ -1,1 +1,1 @@
-web: gunicorn app_noplots:application
+web: gunicorn app_redirect:application
