@@ -1,0 +1,27 @@
+# Git and GitHub Setup Instructions
+
+## Initialize Git in your project
+cd C:\Users\uumap\Desktop\iris_predictor_app
+git init
+
+## Configure your Git identity
+git config --global user.name "Your Name"
+git config --global user.email "your.email@example.com"
+
+## Add your files to Git
+git add .
+
+## Commit your files
+git commit -m "Initial commit"
+
+## Link your local repository to GitHub
+git remote add origin https://github.com/YOUR_USERNAME/iris-predictor-app.git
+
+## Push your code to GitHub
+git push -u origin master
+
+# Note: If your default branch is named "main" instead of "master", use:
+# git push -u origin main
+
+## Verify your repository is on GitHub
+# Visit https://github.com/YOUR_USERNAME/iris-predictor-app

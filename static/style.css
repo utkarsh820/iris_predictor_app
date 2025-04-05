@@ -1,0 +1,349 @@
+/* static/style.css */
+
+:root {
+    --neon-blue: #00f3ff;
+    --neon-pink: #ff00ff;
+    --neon-green: #0fff50;
+    --dark-bg: #0a0b1e;
+    --darker-bg: #060714;
+    --card-bg: rgba(10, 11, 30, 0.7);
+    --text-glow: 0 0 10px var(--neon-blue);
+    --green-glow: 0 0 10px var(--neon-green);
+}
+
+/* Typography */
+body {
+    font-family: 'Share Tech Mono', monospace;
+    background-color: var(--dark-bg);
+    color: #fff;
+    background-image: 
+        linear-gradient(45deg, rgba(0, 243, 255, 0.1) 1%, transparent 1%),
+        linear-gradient(-45deg, rgba(255, 0, 255, 0.1) 1%, transparent 1%);
+    background-size: 3px 3px;
+}
+
+h1, h2, h3, .navbar-brand, .btn {
+    font-family: 'Orbitron', sans-serif;
+    letter-spacing: 1px;
+}
+
+/* Navbar */
+.navbar {
+    background: var(--darker-bg) !important;
+    border-bottom: 2px solid var(--neon-blue);
+    box-shadow: 0 2px 15px rgba(0, 243, 255, 0.3);
+}
+
+.navbar-brand {
+    color: var(--neon-blue) !important;
+    text-shadow: var(--text-glow);
+}
+
+/* Hero Section */
+.hero {
+    background: linear-gradient(to bottom, rgba(10, 11, 30, 0.8), var(--dark-bg)),
+                url('https://images.unsplash.com/photo-1525310072745-f49212b5ac6d?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80') no-repeat center center;
+    border-bottom: none; /* Remove the purple border that was causing overlap */
+    padding: 4rem 0;
+    margin-bottom: 3rem; /* Add margin to create space between sections */
+    position: relative; /* Add this for proper stacking context */
+}
+
+.hero-title {
+    color: var(--neon-blue);
+    text-shadow: var(--text-glow);
+    font-size: 3.5rem;
+    font-weight: 700;
+    margin-bottom: 1.5rem;
+}
+
+.hero-subtitle {
+    color: #fff !important;
+    font-size: 1.2rem;
+    margin-bottom: 2rem;
+}
+
+/* Main Content Area spacing */
+#normal-ui {
+    position: relative; /* Add this for proper stacking context */
+    z-index: 1; /* Ensure content stays above any potential overlapping elements */
+    padding-top: 2rem; /* Add some padding at the top */
+}
+
+/* Cards */
+.card {
+    margin-top: 1rem; /* Add some space at the top of cards */
+    background: var(--card-bg) !important;
+    border: 1px solid var(--neon-blue) !important;
+    box-shadow: 0 0 15px rgba(0, 243, 255, 0.2);
+    backdrop-filter: blur(10px);
+}
+
+.card:hover {
+    box-shadow: 0 0 25px rgba(0, 243, 255, 0.4);
+    transform: translateY(-5px);
+}
+
+/* Card Titles */
+.card-title {
+    font-family: 'Orbitron', sans-serif;
+    font-size: 1.8rem;
+    font-weight: 600;
+    letter-spacing: 1px;
+    margin-bottom: 1.5rem;
+}
+
+/* Form Elements */
+.form-label {
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 1.1rem;
+    letter-spacing: 0.5px;
+    margin-bottom: 0.5rem;
+    color: var(--neon-green);
+    text-shadow: var(--green-glow);
+    font-weight: 500;
+}
+
+.form-control {
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid var(--neon-green);
+    color: #fff;
+}
+
+.form-control:focus {
+    background: rgba(255, 255, 255, 0.15);
+    border-color: var(--neon-green);
+    box-shadow: 0 0 15px rgba(15, 255, 80, 0.3);
+    color: #fff;
+}
+
+.input-group-text {
+    background: rgba(15, 255, 80, 0.1);
+    border: 1px solid var(--neon-green);
+    color: var(--neon-green);
+}
+
+/* Add animation for the form labels */
+.form-label {
+    animation: neonPulseGreen 2s infinite;
+}
+
+@keyframes neonPulseGreen {
+    0% { opacity: 0.8; }
+    50% { opacity: 1; text-shadow: 0 0 15px var(--neon-green); }
+    100% { opacity: 0.8; }
+}
+
+/* Input card specific styles */
+.input-card {
+    border-color: var(--neon-green) !important;
+    box-shadow: 0 0 15px rgba(15, 255, 80, 0.2);
+}
+
+.input-card:hover {
+    box-shadow: 0 0 25px rgba(15, 255, 80, 0.4);
+}
+
+.input-card .card-title {
+    color: var(--neon-green);
+    text-shadow: var(--green-glow);
+    font-size: 2rem;
+    text-transform: uppercase;
+    margin-bottom: 2rem;
+}
+
+/* Buttons */
+.btn-primary {
+    background: transparent;
+    border: 2px solid var(--neon-blue);
+    color: var(--neon-blue);
+    text-shadow: var(--text-glow);
+    box-shadow: 0 0 15px rgba(0, 243, 255, 0.3);
+}
+
+.btn-primary:hover {
+    background: var(--neon-blue);
+    border-color: var(--neon-blue);
+    color: var(--darker-bg);
+    box-shadow: 0 0 25px rgba(0, 243, 255, 0.5);
+}
+
+/* Result Section */
+.result-card {
+    border-color: var(--neon-blue) !important;
+    box-shadow: 0 0 15px rgba(0, 243, 255, 0.2);
+}
+
+.result-card:hover {
+    box-shadow: 0 0 25px rgba(0, 243, 255, 0.4);
+}
+
+.result-title {
+    font-family: 'Orbitron', sans-serif;
+    font-size: 2rem;
+    font-weight: 700;
+    color: var(--neon-blue);
+    text-shadow: var(--text-glow);
+    animation: neonPulse 2s infinite;
+}
+
+.predicted-species {
+    font-family: 'Orbitron', sans-serif;
+    font-size: 1.8rem;
+    letter-spacing: 1px;
+    color: var(--neon-pink);
+    text-shadow: 0 0 10px var(--neon-pink);
+    animation: neonPulse 2s infinite;
+}
+
+.description {
+    color: var(--neon-blue) !important; /* Change from white to neon blue */
+    font-family: 'Share Tech Mono', monospace; /* Match the cyberpunk theme */
+    text-shadow: 0 0 5px rgba(0, 243, 255, 0.5); /* Add neon glow */
+    font-size: 1.2rem;
+    line-height: 1.8;
+    letter-spacing: 0.5px;
+    padding: 1rem;
+    background: rgba(0, 243, 255, 0.05); /* Subtle background */
+    border-left: 2px solid var(--neon-blue);
+    margin: 1.5rem 0;
+    border-radius: 4px;
+    animation: descriptionPulse 3s infinite;
+}
+
+@keyframes descriptionPulse {
+    0% { opacity: 0.8; }
+    50% { opacity: 1; text-shadow: 0 0 8px var(--neon-blue); }
+    100% { opacity: 0.8; }
+}
+
+/* Result card adjustments */
+.result-card .card-body {
+    padding: 2rem;
+}
+
+.predicted-species {
+    margin-bottom: 1.5rem;
+}
+
+/* Error styling */
+.text-danger {
+    color: #ff355e !important;
+    text-shadow: 0 0 10px rgba(255, 53, 94, 0.5);
+}
+
+.alert-danger {
+    background: rgba(255, 53, 94, 0.1);
+    border: 1px solid #ff355e;
+    color: #ff355e;
+    padding: 1rem;
+    margin: 1rem 0;
+    border-radius: 4px;
+}
+
+/* Footer */
+.footer {
+    background: var(--darker-bg) !important;
+    border-top: 2px solid var(--neon-blue);
+}
+
+.footer .text-muted {
+    color: var(--neon-blue) !important;
+}
+
+/* Animations */
+@keyframes neonPulse {
+    0% { opacity: 0.8; }
+    50% { opacity: 1; }
+    100% { opacity: 0.8; }
+}
+
+.card {
+    animation: neonPulse 2s infinite;
+}
+
+/* Magic Button */
+#magic-button {
+    background: transparent;
+    border: 2px solid var(--neon-pink);
+    color: var(--neon-pink);
+    text-shadow: 0 0 10px var(--neon-pink);
+    box-shadow: 0 0 15px rgba(255, 0, 255, 0.3);
+    padding: 1rem 2rem;
+    font-size: 1.2rem;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    transition: all 0.3s ease;
+    margin-top: 1rem;
+}
+
+#magic-button:hover {
+    background: var(--neon-pink);
+    color: var(--darker-bg);
+    box-shadow: 0 0 25px rgba(255, 0, 255, 0.5);
+    transform: translateY(-2px);
+}
+
+/* Container spacing */
+.container {
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+}
+
+.ai-chat-card {
+    background: rgba(26, 26, 26, 0.9);
+    border: 1px solid var(--neon-blue);
+    box-shadow: 0 0 15px rgba(0, 243, 255, 0.1);
+}
+
+.ai-chat-card .card-title {
+    color: var(--neon-blue);
+    font-family: 'Orbitron', sans-serif;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    text-shadow: 0 0 5px rgba(0, 243, 255, 0.5);
+}
+
+#question-input {
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(0, 243, 255, 0.3);
+    color: white;
+    padding: 0.75rem;
+    font-family: 'Share Tech Mono', monospace;
+}
+
+#question-input:focus {
+    background: rgba(255, 255, 255, 0.15);
+    border-color: var(--neon-blue);
+    box-shadow: 0 0 10px rgba(0, 243, 255, 0.2);
+}
+
+.response-header {
+    color: var(--neon-pink);
+    font-family: 'Orbitron', sans-serif;
+    margin-bottom: 1rem;
+    text-shadow: 0 0 5px rgba(255, 0, 255, 0.5);
+}
+
+.response-content {
+    background: rgba(255, 255, 255, 0.05);
+    border-left: 3px solid var(--neon-pink);
+    padding: 1rem;
+    color: white;
+    font-family: 'Share Tech Mono', monospace;
+    line-height: 1.6;
+}
+
+.ai-answer {
+    white-space: pre-wrap;
+    font-family: 'Share Tech Mono', monospace;
+    line-height: 1.6;
+    padding: 1rem;
+    background: rgba(26, 26, 26, 0.9);
+    border-left: 3px solid var(--neon-blue);
+    margin: 1rem 0;
+}
+
+#ai-loading .spinner-border {
+    color: var(--neon-blue) !important;
+}
