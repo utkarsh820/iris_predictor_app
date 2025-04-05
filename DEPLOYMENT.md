@@ -36,6 +36,7 @@ from app_noplots import application
 ### Step 4: Set Up Virtual Environment
 1. Create a virtual environment: `mkvirtualenv --python=python3.9 iris-env`
 2. Install dependencies: `pip install -r requirements.txt`
+3. Note: The requirements.txt includes gunicorn which is needed for Render.com but not strictly required for PythonAnywhere
 
 ### Step 5: Configure Web App
 1. Set the path to your virtual environment in the Web tab
