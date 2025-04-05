@@ -1,6 +1,15 @@
-# Iris Predictor App
+# Iris Predictor App (Simplified Version)
 
-A web application that predicts Iris flower species based on sepal and petal measurements. The app also includes an AI-powered Q&A feature about Iris flowers.
+A web application that predicts Iris flower species based on sepal and petal measurements. This is a simplified version optimized for deployment on Render.com's free tier.
+
+## Important Note
+
+This simplified version removes the following features to ensure stability on Render.com:
+- Matplotlib visualizations
+- Google Gemini AI integration
+- Complex data processing
+
+The full version with all features is available in the `app.py` file.
 
 ## Features
 
