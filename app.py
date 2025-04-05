@@ -349,6 +349,38 @@ def health_check():
         'python_version': os.environ.get('PYTHON_VERSION', 'unknown')
     })
 
+# Detect the platform we're running on
+def is_pythonanywhere():
+    """Check if we're running on PythonAnywhere"""
+    return 'PYTHONANYWHERE_SITE' in os.environ
+
+def is_render():
+    """Check if we're running on Render.com"""
+    return 'RENDER' in os.environ
+
+# Platform-specific configurations
+def configure_for_platform():
+    """Apply platform-specific configurations"""
+    if is_pythonanywhere():
+        print("Running on PythonAnywhere - applying specific configurations")
+        # PythonAnywhere specific configurations can go here
+        # For example, you might want to adjust session settings, etc.
+        pass
+
+    elif is_render():
+        print("Running on Render.com - applying specific configurations")
+        # Render.com specific configurations can go here
+        pass
+
+    else:
+        print("Running on local/other environment")
+
+# Apply platform-specific configurations
+configure_for_platform()
+
+# This allows the app to be imported by WSGI servers
+application = app
+
 if __name__ == "__main__":
     # Get port from environment variable or default to 5000
     port = int(os.environ.get("PORT", 5000))
